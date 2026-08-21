@@ -380,3 +380,528 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenWorks - Multilingual Learning & Skill Hub</title>
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --accent: #10b981;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 3rem;
+    }
+
+    /* Navbar */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand span {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: #f1f5f9;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+    }
+
+    /* Left Sidebar: Profile Card & Setup */
+    .profile-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+    }
+
+    button.btn-primary {
+      width: 100%;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button.btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #e0f2fe;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    /* Main Learning Section */
+    .learning-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .lang-selector {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Vocabulary & Phrase Grid */
+    .phrases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .phrase-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .phrase-card strong {
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .phrase-card span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .listen-btn {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.2s;
+    }
+
+    .listen-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Quiz Area */
+    .quiz-area {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .opt-btn {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .opt-btn:hover {
+      background: #e0f2fe;
+      border-color: var(--primary);
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GenWorks Header -->
+  <header>
+    <div class="brand">
+      GenWorks <span>Learning & Trade Hub</span>
+    </div>
+    <div id="headerRoleBadge" style="font-size: 0.85rem; color: var(--muted);">
+      Guest Mode
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Left Column: User Profile -->
+    <aside class="profile-panel">
+      <div class="card" id="profileFormCard">
+        <h3>Create Your Profile</h3>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="e.g. Rahul Sharma" required />
+          </div>
+          <div class="form-group">
+            <label for="userType">I am a...</label>
+            <select id="userType" required>
+              <option value="Skilled Labour / Tradesperson">Skilled Labour / Tradesperson</option>
+              <option value="Engineering / Polytech Student">Student</option>
+              <option value="Field Apprentice">Field Apprentice</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tradeField">Specialization / Trade</label>
+            <select id="tradeField" required>
+              <option value="Electrical & Solar">Electrical & Solar</option>
+              <option value="Carpentry & Construction">Carpentry & Construction</option>
+              <option value="Automotive & Mechanical">Automotive & Mechanical</option>
+              <option value="Agriculture Tech">Agriculture Tech</option>
+              <option value="Plumbing & Sanitation">Plumbing & Sanitation</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary">Save Profile</button>
+        </form>
+      </div>
+
+      <!-- Rendered Profile Info -->
+      <div class="card" id="userBadgeCard" style="display:none;">
+        <h3 id="displayUserName">Welcome!</h3>
+        <p id="displayUserRole" style="font-size:0.9rem; color:var(--muted);"></p>
+        <span id="displayUserTrade" class="badge-pill"></span>
+        <button id="editProfileBtn" style="margin-top: 1rem; width: 100%; border: 1px solid var(--border); padding: 0.5rem; border-radius: 6px; background: transparent; cursor: pointer;">Edit Profile</button>
+      </div>
+    </aside>
+
+    <!-- Right Column: Interactive Language Hub -->
+    <main class="learning-panel">
+      <div class="card">
+        <h3>Select Language to Learn</h3>
+        <div class="lang-selector" id="langSelector">
+          <button class="lang-btn active" data-lang="hindi">Hindi</button>
+          <button class="lang-btn" data-lang="tamil">Tamil</button>
+          <button class="lang-btn" data-lang="telugu">Telugu</button>
+          <button class="lang-btn" data-lang="kannada">Kannada</button>
+          <button class="lang-btn" data-lang="english">Workplace English</button>
+        </div>
+
+        <div class="phrases-grid" id="phrasesContainer"></div>
+      </div>
+
+      <!-- Quick Interactive Practice -->
+      <div class="quiz-area">
+        <h3>Interactive Trade Quiz</h3>
+        <p id="quizQuestion" style="font-size: 0.95rem; color: var(--muted); margin-top: 0.5rem;"></p>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Multilingual Trade Data
+    const languageData = {
+      hindi: {
+        code: "hi-IN",
+        phrases: [
+          { en: "Where is the main power switch?", translated: "मेन पावर स्विच कहाँ है?", roman: "Main power switch kahan hai?" },
+          { en: "Please wear safety gear.", translated: "कृपया सुरक्षा उपकरण पहनें।", roman: "Kripya suraksha upkaran pehnein." },
+          { en: "Check the circuit voltage.", translated: "सर्किट वोल्टेज की जाँच करें।", roman: "Circuit voltage ki jaanch karein." },
+          { en: "Need help lifting this beam.", translated: "इस बीम को उठाने में मदद चाहिए।", roman: "Is beam ko uthane mein madad chahiye." }
+        ],
+        quiz: {
+          q: "What is the Hindi phrase for 'Please wear safety gear'?",
+          options: ["मेन पावर स्विच कहाँ है?", "कृपया सुरक्षा उपकरण पहनें।", "सर्किट वोल्टेज की जाँच करें।", "काम पूरा हो गया।"],
+          correct: 1
+        }
+      },
+      tamil: {
+        code: "ta-IN",
+        phrases: [
+          { en: "Where is the main power switch?", translated: "முதன்மை சுவிட்ச் எங்கே உள்ளது?", roman: "Mudhanmai switch enge ulladhu?" },
+          { en: "Please wear safety gear.", translated: "தயவுசெய்து பாதுகாப்பு கவசங்களை அணியுங்கள்.", roman: "Thayavuseidhu paadhukaappu kavasangalai aniyungal." },
+          { en: "Check the circuit voltage.", translated: "மின்சுற்று மின்னழுத்தத்தை சரிபார்க்கவும்.", roman: "Minsutru minnaluthathai saripaarkkavum." },
+          { en: "Need help lifting this beam.", translated: "இந்த தூணை தூக்க உதவி வேண்டும்.", roman: "Indha thoonai thookka udhavi vendum." }
+        ],
+        quiz: {
+          q: "What is the Tamil phrase for 'Where is the main power switch?'",
+          options: ["தயவுசெய்து பாதுகாப்பு அணியுங்கள்", "முதன்மை சுவிட்ச் எங்கே உள்ளது?", "மின்னழுத்தத்தை சரிபார்க்கவும்", "வேலை முடிந்தது"],
+          correct: 1
+        }
+      },
+      telugu: {
+        code: "te-IN",
+        phrases: [
+          { en: "Where is the main power switch?", translated: "ప్రధాన పవర్ స్విచ్ ఎక్కడ ఉంది?", roman: "Pradhana power switch ekkada undi?" },
+          { en: "Please wear safety gear.", translated: "దయచేసి భద్రతా సాధనాలు ధరించండి.", roman: "Dayachesi bhadratha sadhanalu dharinchandi." },
+          { en: "Check the circuit voltage.", translated: "సర్క్యూట్ వోల్టేజ్‌ని తనిఖీ చేయండి.", roman: "Circuit voltage-ni thanikhee cheyandi." },
+          { en: "Need help lifting this beam.", translated: "ఈ దూలం ఎత్తడానికి సహాయం కావాలి.", roman: "Ee doolam ethadaniki sahayam kavali." }
+        ],
+        quiz: {
+          q: "What is the Telugu phrase for 'Check the circuit voltage'?",
+          options: ["ప్రధాన పవర్ స్విచ్ ఎక్కడ ఉంది?", "ఈ దూలం ఎత్తండి", "సర్క్యూట్ వోల్టేజ్‌ని తనిఖీ చేయండి.", "సహాయం కావాలి"],
+          correct: 2
+        }
+      },
+      kannada: {
+        code: "kn-IN",
+        phrases: [
+          { en: "Where is the main power switch?", translated: "ಮುಖ್ಯ ಪವರ್ ಸ್ವಿಚ್ ಎಲ್ಲಿದೆ?", roman: "Mukhya power switch ellide?" },
+          { en: "Please wear safety gear.", translated: "ದಯವಿಟ್ಟು ಸುರಕ್ಷತಾ ಸಾಧನಗಳನ್ನು ಧರಿಸಿ.", roman: "Dayavittu surakshata sadhanagalannu dharisi." },
+          { en: "Check the circuit voltage.", translated: "ಸರ್ಕ್ಯೂಟ್ ವೋಲ್ಟೇಜ್ ಪರಿಶೀಲಿಸಿ.", roman: "Circuit voltage parisheelisi." },
+          { en: "Need help lifting this beam.", translated: "ಈ ಕಂಬವನ್ನು ಎತ್ತಲು ಸಹಾಯ ಬೇಕು.", roman: "Ee kambavannu ettalu sahaya beku." }
+        ],
+        quiz: {
+          q: "What is the Kannada phrase for 'Please wear safety gear'?",
+          options: ["ಮುಖ್ಯ ಪವರ್ ಸ್ವಿಚ್ ಎಲ್ಲಿದೆ?", "ದಯವಿಟ್ಟು ಸುರಕ್ಷತಾ ಸಾಧನಗಳನ್ನು ಧರಿಸಿ.", "ಕೆಲಸ ಮುಗಿದಿದೆ", "ವೋಲ್ಟೇಜ್ ಪರಿಶೀಲಿಸಿ"],
+          correct: 1
+        }
+      },
+      english: {
+        code: "en-US",
+        phrases: [
+          { en: "Where is the main power switch?", translated: "Where is the main power switch?", roman: "Clear site communication" },
+          { en: "Please wear safety gear.", translated: "Please wear safety equipment (PPE).", roman: "Essential safety protocol" },
+          { en: "Check the circuit voltage.", translated: "Verify the circuit voltage rating.", roman: "Inspection protocol" },
+          { en: "Need help lifting this beam.", translated: "Requesting spotter / team lift assistance.", roman: "Material handling" }
+        ],
+        quiz: {
+          q: "What does 'PPE' stand for on a work site?",
+          options: ["Personal Power Engine", "Personal Protective Equipment", "Private Project Entry", "Pipeline Pressure Evaluation"],
+          correct: 1
+        }
+      }
+    };
+
+    let activeLang = "hindi";
+
+    // Text-to-Speech Engine
+    function speakText(text, langCode) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = langCode;
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Audio synthesis is not supported on this browser.");
+      }
+    }
+
+    // Render Learning Content
+    function renderContent() {
+      const data = languageData[activeLang];
+      const container = document.getElementById("phrasesContainer");
+      container.innerHTML = "";
+
+      data.phrases.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "phrase-card";
+        div.innerHTML = `
+          <div>
+            <span>Meaning: ${item.en}</span>
+            <strong style="display:block; margin-top: 0.35rem;">${item.translated}</strong>
+            <small style="color: var(--muted); display:block; margin-top: 0.2rem;">${item.roman}</small>
+          </div>
+          <button class="listen-btn" onclick="speakText('${item.translated}', '${data.code}')">
+            🔊 Listen Audio
+          </button>
+        `;
+        container.appendChild(div);
+      });
+
+      // Render Quiz
+      const quiz = data.quiz;
+      document.getElementById("quizQuestion").textContent = quiz.q;
+      const optionsBox = document.getElementById("quizOptions");
+      const feedback = document.getElementById("quizFeedback");
+      feedback.textContent = "";
+      optionsBox.innerHTML = "";
+
+      quiz.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "opt-btn";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (idx === quiz.correct) {
+            feedback.textContent = "Correct! Great job.";
+            feedback.style.color = "var(--accent)";
+          } else {
+            feedback.textContent = "Incorrect. Try again!";
+            feedback.style.color = "#ef4444";
+          }
+        };
+        optionsBox.appendChild(btn);
+      });
+    }
+
+    // Language Filter Buttons
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeLang = btn.dataset.lang;
+        renderContent();
+      });
+    });
+
+    // Profile Management
+    const profileForm = document.getElementById("profileForm");
+    const profileFormCard = document.getElementById("profileFormCard");
+    const userBadgeCard = document.getElementById("userBadgeCard");
+    const headerRoleBadge = document.getElementById("headerRoleBadge");
+
+    profileForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("fullName").value.trim();
+      const role = document.getElementById("userType").value;
+      const trade = document.getElementById("tradeField").value;
+
+      document.getElementById("displayUserName").textContent = name;
+      document.getElementById("displayUserRole").textContent = role;
+      document.getElementById("displayUserTrade").textContent = trade;
+      headerRoleBadge.textContent = `${name} (${role})`;
+
+      profileFormCard.style.display = "none";
+      userBadgeCard.style.display = "block";
+    });
+
+    document.getElementById("editProfileBtn").addEventListener("click", () => {
+      profileFormCard.style.display = "block";
+      userBadgeCard.style.display = "none";
+    });
+
+    // Initial render
+    renderContent();
+  </script>
+</body>
+</html>
