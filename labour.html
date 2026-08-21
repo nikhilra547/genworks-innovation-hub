@@ -1,1 +1,44 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Choose Your Stream — GenWorks</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="portal.css"></head><body class="labour-page"><header class="portal-header"><a class="logo" href="index.html"><i></i>GENWORKS</a><p>Work stream explorer</p><a class="back" href="index.html">← Back to site</a></header><main><section class="portal-hero"><div><p class="eyebrow">SKILLED WORKER SPACE / 02</p><h1>Find work that<br>uses your <em>strength.</em></h1><p>Choose a stream based on what you do best. See the kind of work involved, then share your interest with the GenWorks team.</p></div><aside><span>↗</span><p>Your skills are not a label. They are a starting point for useful contribution.</p></aside></section><section class="stream-section"><div class="stream-intro"><p class="eyebrow">CHOOSE A STREAM</p><h2>What kind of<br>work fits you?</h2><p>Select one stream to see its focus. You can change it anytime before sending your interest.</p></div><div class="stream-grid"><button class="stream-card lime selected" data-stream="Build & technology" data-description="Develop digital tools, prototype solutions, manage platforms, and turn practical ideas into working systems."><span>01</span><b>⌘</b><h3>Build &amp;<br>technology</h3><p>Tools, prototypes, digital systems</p></button><button class="stream-card coral" data-stream="Design & creative" data-description="Shape stories, visuals, campaigns, and brand experiences that make ideas easy to understand and remember."><span>02</span><b>✳</b><h3>Design &amp;<br>creative</h3><p>Visuals, writing, campaigns</p></button><button class="stream-card blue" data-stream="Growth & outreach" data-description="Connect projects with the people who need them through community, marketing, partnerships, and communication."><span>03</span><b>◎</b><h3>Growth &amp;<br>outreach</h3><p>Marketing, partnerships, community</p></button><button class="stream-card violet" data-stream="Operations & support" data-description="Bring calm and consistency to the work through planning, coordination, logistics, and reliable support."><span>04</span><b>⌁</b><h3>Operations &amp;<br>support</h3><p>Planning, logistics, coordination</p></button><button class="stream-card coral" data-stream="Language learning" data-description="Build practical language skills for clearer communication, greater confidence, and more opportunities at work."><span>05</span><b>◌</b><h3>Language<br>learning</h3><p>Communication, confidence, opportunity</p></button></div><aside class="selection-panel"><p class="eyebrow">YOUR SELECTION</p><h3 id="streamName">Build &amp; technology</h3><p id="streamDescription">Develop digital tools, prototype solutions, manage platforms, and turn practical ideas into working systems.</p><button id="interestButton">I’m interested in this stream <span>→</span></button></aside></section></main><dialog id="interestDialog"><button class="close">×</button><p class="eyebrow">STREAM INTEREST</p><h2>Let’s connect.</h2><p id="selectedStreamText"></p><form id="interestForm" action="https://formsubmit.co/rn167024@gmail.com" method="POST"><input type="hidden" name="_subject" value="New GenWorks skilled worker interest"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="true"><input type="hidden" name="_next" value=""><input type="hidden" name="chosen_stream" id="streamInput"><label>Your name<input required name="worker_name" placeholder="Name"></label><label>Email address<input required type="email" name="worker_email" placeholder="you@example.com"></label><label>Your strongest skill<textarea required name="skills" placeholder="Tell us what you do well..."></textarea></label><button type="submit">Send my interest <span>↗</span></button></form></dialog><div class="toast" hidden><b>✦ Interest received</b><p>Thank you — we’ll be in touch about your chosen stream.</p><button>×</button></div><script src="portal.js"></script></body></html>
+<section class="dream-hub-section">
+  <div class="hub-header">
+    <h2>🌟 Innovation & Dream Hub</h2>
+    <p>Explore ideas across different trades, view community projects, and submit your own dream blueprint.</p>
+  </div>
+
+  <!-- Search & Category Filters -->
+  <div class="hub-controls">
+    <input type="text" id="dreamSearch" placeholder="🔍 Search projects, skills, or tools..." />
+    
+    <div class="filter-pills" id="categoryFilters">
+      <button class="filter-btn active" data-category="all">All Fields</button>
+      <button class="filter-btn" data-category="agriculture">Agriculture & Farming</button>
+      <button class="filter-btn" data-category="electrical">Electrical & Solar</button>
+      <button class="filter-btn" data-category="carpentry">Carpentry & Craft</button>
+      <button class="filter-btn" data-category="automotive">Mechanics & Auto</button>
+      <button class="filter-btn" data-category="microbusiness">Small Business</button>
+    </div>
+  </div>
+
+  <!-- Interactive Project Cards Grid -->
+  <div class="projects-grid" id="projectsGrid">
+    <!-- Populated via JavaScript -->
+  </div>
+
+  <!-- Add New Dream Form -->
+  <div class="add-dream-card">
+    <h3>💡 Share Your Project Dream</h3>
+    <form id="addDreamForm">
+      <input type="text" id="workerName" placeholder="Your Name or Team" required />
+      <select id="projectCategory" required>
+        <option value="" disabled selected>Select Field of Interest</option>
+        <option value="agriculture">Agriculture & Farming</option>
+        <option value="electrical">Electrical & Solar</option>
+        <option value="carpentry">Carpentry & Craft</option>
+        <option value="automotive">Mechanics & Auto</option>
+        <option value="microbusiness">Small Business</option>
+      </select>
+      <input type="text" id="projectTitle" placeholder="Project Title (e.g., Solar Water Pump)" required />
+      <textarea id="projectDesc" rows="3" placeholder="Describe the idea, required materials, or how peers can collaborate..." required></textarea>
+      <button type="submit" class="submit-btn">+ Post Your Dream</button>
+    </form>
+  </div>
+</section>
