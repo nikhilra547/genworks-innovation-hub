@@ -1,12 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Innovation & Dream Hub</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 2rem 1rem;
+    }
+
+    .dream-hub-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hub-header {
+      text-align: center;
+    }
+
+    .hub-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .hub-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Controls: Search & Category Pills */
+    .hub-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    #dreamSearch {
+      width: 100%;
+      max-width: 500px;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #dreamSearch:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Cards Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .badge {
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    .project-card h4 {
+      font-size: 1.15rem;
+      color: var(--text-main);
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .project-author {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 0.5rem;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    /* Form Container */
+    .add-dream-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .add-dream-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    #addDreamForm {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    #addDreamForm input,
+    #addDreamForm select,
+    #addDreamForm textarea {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    #addDreamForm input:focus,
+    #addDreamForm select:focus,
+    #addDreamForm textarea:focus {
+      border-color: var(--primary);
+    }
+
+    #projectTitle,
+    #projectDesc,
+    .submit-btn {
+      grid-column: 1 / -1;
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.85rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    @media (max-width: 640px) {
+      #addDreamForm {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
 <section class="dream-hub-section">
   <div class="hub-header">
-    <h2>🌟 Innovation & Dream Hub</h2>
+    <h2>Innovation & Dream Hub</h2>
     <p>Explore ideas across different trades, view community projects, and submit your own dream blueprint.</p>
   </div>
 
   <!-- Search & Category Filters -->
   <div class="hub-controls">
-    <input type="text" id="dreamSearch" placeholder="🔍 Search projects, skills, or tools..." />
+    <input type="text" id="dreamSearch" placeholder="Search projects, skills, or tools..." />
     
     <div class="filter-pills" id="categoryFilters">
       <button class="filter-btn active" data-category="all">All Fields</button>
@@ -19,13 +256,11 @@
   </div>
 
   <!-- Interactive Project Cards Grid -->
-  <div class="projects-grid" id="projectsGrid">
-    <!-- Populated via JavaScript -->
-  </div>
+  <div class="projects-grid" id="projectsGrid"></div>
 
   <!-- Add New Dream Form -->
   <div class="add-dream-card">
-    <h3>💡 Share Your Project Dream</h3>
+    <h3>Share Your Project Dream</h3>
     <form id="addDreamForm">
       <input type="text" id="workerName" placeholder="Your Name or Team" required />
       <select id="projectCategory" required>
@@ -42,3 +277,106 @@
     </form>
   </div>
 </section>
+
+<script>
+  const projects = [
+    {
+      name: "Ramesh K.",
+      category: "agriculture",
+      title: "Automated Drip Irrigation",
+      desc: "Low-cost soil moisture sensor setup to regulate drip lines for small tomato farms."
+    },
+    {
+      name: "Priya Solar Tech",
+      category: "electrical",
+      title: "Portable Solar Charging Cart",
+      desc: "Foldable 200W solar station designed to recharge power tools at remote construction sites."
+    },
+    {
+      name: "Anand Woods",
+      category: "carpentry",
+      title: "Modular Bamboo Workbenches",
+      desc: "Lightweight, collapsible workbench blueprints made from locally treated bamboo."
+    }
+  ];
+
+  let selectedCategory = "all";
+  let searchKeyword = "";
+
+  const grid = document.getElementById("projectsGrid");
+  const searchInput = document.getElementById("dreamSearch");
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const dreamForm = document.getElementById("addDreamForm");
+
+  function renderProjects() {
+    grid.innerHTML = "";
+    
+    const filtered = projects.filter(item => {
+      const matchCat = selectedCategory === "all" || item.category === selectedCategory;
+      const matchSearch = item.title.toLowerCase().includes(searchKeyword) || 
+                          item.desc.toLowerCase().includes(searchKeyword) ||
+                          item.name.toLowerCase().includes(searchKeyword);
+      return matchCat && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state">No blueprints or projects match your query.</div>`;
+      return;
+    }
+
+    filtered.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "project-card";
+      card.innerHTML = `
+        <span class="badge">${p.category}</span>
+        <h4>${escapeHTML(p.title)}</h4>
+        <p>${escapeHTML(p.desc)}</p>
+        <div class="project-author">By: <strong>${escapeHTML(p.name)}</strong></div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+  }
+
+  // Filter Buttons
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedCategory = btn.getAttribute("data-category");
+      renderProjects();
+    });
+  });
+
+  // Search Input
+  searchInput.addEventListener("input", (e) => {
+    searchKeyword = e.target.value.trim().toLowerCase();
+    renderProjects();
+  });
+
+  // Add Project
+  dreamForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newProject = {
+      name: document.getElementById("workerName").value.trim(),
+      category: document.getElementById("projectCategory").value,
+      title: document.getElementById("projectTitle").value.trim(),
+      desc: document.getElementById("projectDesc").value.trim()
+    };
+
+    projects.unshift(newProject);
+    dreamForm.reset();
+    renderProjects();
+  });
+
+  // Initial render
+  renderProjects();
+</script>
+
+</body>
+</html>
